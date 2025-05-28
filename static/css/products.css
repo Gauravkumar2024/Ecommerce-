@@ -1,0 +1,54 @@
+.myPage{
+    justify-content: space-between;
+}
+.first-image{
+    width: 340px;
+    
+}
+
+.small-pic{
+    padding: 20px;
+}
+.small-images{
+ width: 50px;
+ gap: 2px;
+ border-radius: 6px;
+}
+.my-small-images{
+display: flex;
+gap: 20px;
+}
+/* ============================
+*/
+
+/* Main image container to hold the zoom effect */
+.main-img {
+    position: relative;
+    overflow: hidden; /* Ensure zoomed image stays within the boundaries */
+}
+
+/* Image style and transition */
+.first-image {
+    transition: transform 0.3s ease; /* Smooth zoom transition */
+    width: 300px; /* Ensure image width is responsive */
+    height: auto; /* Keep aspect ratio */
+}
+
+/* Container for the zoomed effect */
+.main-img .zoomed {
+    position: absolute;
+    width: 120px; /* Size of the zoomed box */
+    height: 120px; /* Size of the zoomed box */
+    background-repeat: no-repeat;
+    background-size: 300%; /* Adjust to zoom level */
+    /* border: 2px solid rgba(0, 0, 0, 0.3); */
+    visibility: hidden; /* Hide it by default */
+    pointer-events: none; /* Prevent interfering with clicks */
+    border-radius: 50%;
+}
+
+/* Show zoom effect on hover */
+.main-img:hover .zoomed {
+    visibility: visible;
+}
+

@@ -1,0 +1,68 @@
+<!-- {% load static %} -->
+{% include "base/base.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="../../static/css/bag.css">
+  
+</head>
+<body>
+    <h4 class="heading"><b>Shopping Cart</b></h4>
+    <div class="container main-div">
+         <div class="row">
+        {% for item in cart %}
+        <div class="bag-item">
+            <div class="left-part">
+                <img src="/media/{{item.image.image}}" class="bag-item-img" alt="">
+            </div>
+           
+            <div class="right-part">
+                <div class="comany-name"> {{ item.user }}</div>
+                <div class="item-name">{{ item.product.product_name  }}</div>
+                <div class="price">
+                     <span class="current-price">price : ₹{{ item.price_new  }}</span>
+                </div>
+                <div class="price">
+                    <span>size : {{ item.size  }}</span>
+                </div>
+                <div class="return-period">
+                    <span class="return-period-days">7 days</span> return available
+                  </div>
+                  <div class="delivery-details">
+                    <span class="delivery-details-days">Paid : {{ item.cart.is_paid  }}</span>
+                  </div>
+            </div>
+            <div class="remove-from-cart">
+                <a href="{% url 'remove' item.id %}" style="text-decoration: none;">X</a>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+        <div class="main-summary">
+            <div class="item-price">
+             <span class="price-tag">Total MRP</span>
+             <span class="price-value">{{total}}</span>
+            </div>
+            <div class="item-price">
+             <span class="price-tag">Discount</span>
+             <span class="price-value discount-item">-₹10</span>
+            </div>
+            <div class="item-price">
+             <span class="price-tag">convience fee</span>
+             <span class="price-value">+₹10</span>
+            </div>
+            <hr>
+            <div class="price-footer">
+             <span class="price-tag">Total  Amount</span>
+             <span class="price-value">{{total}} Rs</span>
+            </div>
+            <button class="btn-order">place order</button>
+         </div>
+    </div>
+
+    
+</body>
+</html>

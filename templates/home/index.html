@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+
+<body>
+    {% include "base/base.html"%}
+
+    <div class="mains">
+        {% for data in product %}
+        <div class="value-container">
+            <img src=" /media/{{data.product_image.first.image}}" alt="product" class="item-image">
+            <div class="comany-name">
+
+                {{data.product_name}}
+
+            </div>
+            <div class="item-name">{{data.product_desc}}</div>
+            <div class="price">
+                <span class="current-price">Rs.{{data.price}}</span>
+            </div>
+            <a href="{% url 'get_product' data.slug %}">
+                <button class="btn-item">Link</button></a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% include "base/footer.html"%}

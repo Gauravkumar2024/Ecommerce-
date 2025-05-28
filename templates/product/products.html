@@ -1,0 +1,164 @@
+{% include "base/base.html"%}
+
+
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+<div class="container mt-5">
+
+    <div class="myPage row">
+        <!-- Product Images -->
+        <div class="main-img col-md-6 mb-4">
+            <div class="small-pic col-md-12">
+                <img src=" /media/{{product.product_image.first.image}}" alt="Product"
+                    class="img-fluid rounded mb-3 first-image" id="mainImage">
+            </div>
+            <div class="col-md-12 my-small-images">
+                {% for image in product.product_image.all %}
+                <a href="#"> <img src="/media/{{image.image}}" class="small-images"></a>
+
+                {% endfor %}
+
+            </div>
+        </div>
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h2 class="mb-3">{{product.product_name}}</h2>
+            <p class="text-muted mb-4">{{product.category}}</p>
+            <div class="mb-3">
+                <span id="product-price" class="h4 me-2">
+                    {% if update %}
+                    ₹{{ update.price }}
+                    {% else %}
+                    ₹{{ product.price }}
+                    {% endif %}
+                </span>  <!-- Initial price -->
+
+                <!-- <span class="text-muted"><s>$399.99</s></span> -->
+                <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
+            </div>
+            <div class="mb-3">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-half text-warning"></i>
+                <span class="ms-2">4.5 (120 reviews)</span>
+            </div>
+            <p class="mb-4">{{product.product_desc}}</p>
+            <div class="mb-4">
+                <h5>Color:</h5>
+                <div class="btn-group" role="group" aria-label="Color selection">
+                    {% for color in product.color_var.all %}
+                    <input type="radio" class="btn-check" id="color_{{ product.id }}_{{ color.id }}" 
+                        name="color" autocomplete="off" 
+                        onchange="handlecolor('{{ color.color_name }}')" >
+                    <label class="btn btn-outline-primary" for="color_{{ product.id }}_{{ color.id }}">
+                        {{ color.color_name }}
+                    </label>
+                    {% empty %}
+                    <li>No colors available.</li>
+                    {% endfor %}
+                </div>
+                
+                <h5>Size:</h5>
+                {% for size in product.size_var.all %}
+                <input type="radio" class="btn-check" id="size_{{ product.id }}_{{ size.id }}"
+                    name="size" autocomplete="off" value="{{size.size_number}}"
+                    onchange="handle('{{ size.size_number }}')" 
+                    {% if size.size_number == update.size %}checked{% endif %}
+                    >
+                <label class="btn btn-outline-primary" for="size_{{ product.id }}_{{ size.id }}">
+                    {{ size.size_number }}
+                </label>
+                {% empty %}
+                <li>No sizes available.</li>
+                {% endfor %}
+            </div>
+            <!-- <div class="mb-4">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+            </div> -->
+            <a class="btn btn-primary btn-lg mb-3 me-2" href="{% url 'addTocart' product.id %}?variant={{update.size}}&price={{ update.price|default:product.price }}">
+                <i class="bi bi-cart-plus"></i> Add to Cart
+            </a>
+            
+            <button class="btn btn-outline-secondary btn-lg mb-3">
+                 Buy Now
+            </button>
+        </div>
+    </div>
+</div>
+{% include "base/footer.html"%}
+
+
+
+{% endblock %}
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll(".small-images");
+    const mainImage = document.getElementById("mainImage"); // Get the main image element
+
+    images.forEach(image => {
+        image.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default anchor behavior (navigation)
+            // Update the main image's src with the clicked small image's src
+            console.log(image.src);
+            
+            mainImage.src = image.src;
+            console.log('image clicked');
+        });
+    });
+});
+
+// let selectedSizePrice = 0;  // Variable to store size price
+// let selectedColorPrice = 0; // Variable to store color price
+function handle( sizeNumber) {
+    // e.preventDefault(); // Prevents the default action, e.g., form submission
+    console.log(sizeNumber);
+    window.location.href = window.location.pathname + `?size=${sizeNumber}`;
+}
+
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const mainImageElement = document.querySelector(".first-image");
+    const mainImageContainer = mainImageElement.closest(".main-img");
+    const zoomed = document.createElement('div'); // Create a div for the zoom effect
+
+    zoomed.classList.add('zoomed'); // Add the zoomed class for styling
+    mainImageContainer.appendChild(zoomed); // Append zoomed div to the image container
+
+    mainImageElement.addEventListener('mousemove', function(e) {
+        const rect = mainImageElement.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const offsetY = e.clientY - rect.top;
+
+        const xPercent = offsetX / mainImageElement.width * 100;
+        const yPercent = offsetY / mainImageElement.height * 100;
+
+        zoomed.style.backgroundImage = `url(${mainImageElement.src})`;
+        zoomed.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+        zoomed.style.backgroundSize = `${mainImageElement.width * 3}px ${mainImageElement.height * 3}px`;
+
+        zoomed.style.left = `${offsetX - zoomed.offsetWidth / 2}px`;
+        zoomed.style.top = `${offsetY - zoomed.offsetHeight / 2}px`;
+    });
+
+    mainImageElement.addEventListener('mouseleave', function() {
+        zoomed.style.display = "none"; // Hide the zoom effect when mouse leaves the image
+    });
+
+    mainImageElement.addEventListener('mouseenter', function() {
+        zoomed.style.display = "block"; // Show zoom effect on hover
+    });
+});
+
+</script>
+
+<script>
+
+</script>

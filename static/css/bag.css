@@ -1,0 +1,131 @@
+.bag-page{
+ width: 80%;  
+ margin: 100px 0 0 20%; 
+ /* display: flex; */
+}
+.item-name {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+h4.heading {
+  text-align: center;
+  font-family: cursive;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.bag-item{
+  width: 75%;
+  display: flex;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+}
+.left-part{
+    width: 150px;
+}
+.bag-item-img{
+    width: 100%;
+}
+.right-part{
+    padding-left: 15px;
+    width: 100%;
+}
+.return-period {
+    display: inline-flex;
+    font-size: 14px;
+    padding-top: 8px;
+  }
+  .return-period-days {
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  
+  .delivery-details {
+    margin-top: 5px;
+    color: #282c3f;
+    font-size: 12px;
+    letter-spacing: -.1px;
+    margin-bottom: 8px;
+    line-height: 15px;
+  }
+  
+  .delivery-details-days {
+    color: #03a685;
+  }
+  .remove-from-cart {
+    font-size: 15pxpx;
+    position: relative;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    font-weight: 600;
+    padding:1px 0px 22px 8px;
+    color: wheat;
+    background-color: red;
+    /* float: right !important; */
+}
+.bag-summary{
+  vertical-align: top;
+  width: 25%;
+  display: inline-block;
+  /* padding: 20px 0 16px ; */
+  font-size: 13px;
+
+}
+.main-summary{
+  margin-bottom: 16px;
+  width: 50%;
+    padding: 10px
+}
+.top-head{
+  font-size: 12px;
+  font-weight: 700;
+color: #535766;
+margin: 24px 0 16px;
+text-transform: uppercase;
+}
+.item-price{
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #282c3f;
+
+}
+.discount-item{
+  color: #03a685;
+}
+.price-value{
+  float: inline-end;
+}
+.price-tag{
+  font-weight: 500;
+}
+.price-footer{
+  font-weight: 700;
+  font-size: 16px;
+  padding-top: 15px;
+  border: 1px solid #eaeaec;
+  color: #3e4152;
+  line-height: 15px;
+  margin-bottom: 10px;
+}
+.price {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.btn-order{
+  width: 100%;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  border-width: 0px;
+  padding: 10px 16px;
+  background-color: rgb(255, 63, 108);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.main-div{
+  display: flex;
+  justify-content: center;
+}

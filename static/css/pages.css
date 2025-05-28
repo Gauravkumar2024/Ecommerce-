@@ -1,0 +1,90 @@
+
+body {
+    display: flex;
+    flex-direction: column; /* Ensures navbar stays at the top */
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    line-height: 1.5;
+    background: #f3f3f3;
+    margin: 0;
+}
+
+.main {
+    
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 500px;
+    text-align: center;
+    margin-top: 2%;
+}
+
+h2 {
+
+    color: #4CAF50;
+}
+
+label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #4CAF50;
+    width: 100%;
+    font-size: 16px;
+}
+button[type="submit"]:hover{
+    background-color: #38ce3d;
+}
+
+#user{
+    margin-top: 0px;
+    color: #ee0505;
+    font-size: 12px;
+    display: flex;
+}
+@media (max-width: 790px) {
+    body{
+        padding: 15px;
+    }
+    .main{
+       width: 100%;
+       margin-top: auto;
+    }
+    h1{
+        font-size: 25px;
+    }
+}
